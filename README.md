@@ -19,8 +19,11 @@ The solution starts with simple integrations with models deployed in a Microsoft
 .
 ├── Foundry Labs.slnx
 ├── samples
-│   └── 01-GettingStarted
-│       ├── 01-GettingStarted.csproj
+│   ├── 01-GettingStarted
+│   │   ├── 01-GettingStarted.csproj
+│   │   └── Program.cs
+│   └── 02-Conversations
+│       ├── 02-Conversations.csproj
 │       └── Program.cs
 └── README.md
 ```
@@ -29,7 +32,8 @@ The solution starts with simple integrations with models deployed in a Microsoft
 
 | Sample | Description |
 | --- | --- |
-| [`01-GettingStarted`](samples/01-GettingStarted) | Creates a client for a Microsoft Foundry project and sends prompts to a deployed model using the Responses API. |
+| [`01-GettingStarted`](samples/01-GettingStarted) | Sends a single prompt to a deployed model using the Responses API and displays the response. |
+| [`02-Conversations`](samples/02-Conversations) | Maintains a multi-turn conversation and supports `/new` and `/exit` commands. |
 
 New samples will be added to the `samples` directory following an incremental progression in complexity.
 
@@ -48,9 +52,9 @@ The samples use `DefaultAzureCredential` for authentication. For local developme
 az login
 ```
 
-## Configuring the first sample
+## Configuration
 
-The `01-GettingStarted` sample requires the following values:
+Both samples require the following values:
 
 | Setting | Description |
 | --- | --- |
@@ -59,7 +63,7 @@ The `01-GettingStarted` sample requires the following values:
 
 ### Using User Secrets
 
-From the project directory, run:
+From the directory of the sample you want to configure, run:
 
 ```bash
 dotnet user-secrets set "AZURE_AI_PROJECT_ENDPOINT" "https://<your-project>.services.ai.azure.com/api/projects/<your-project>"
@@ -67,6 +71,11 @@ dotnet user-secrets set "MODEL_DEPLOYMENT" "<deployment-name>"
 ```
 
 The values can also be provided as environment variables. Do not commit private endpoints, keys, tokens, or any other secrets to the repository.
+
+```powershell
+$env:AZURE_AI_PROJECT_ENDPOINT = "https://<your-project>.services.ai.azure.com/api/projects/<your-project>"
+$env:MODEL_DEPLOYMENT = "<deployment-name>"
+```
 
 ## Running
 
@@ -77,7 +86,15 @@ dotnet restore
 dotnet run --project samples/01-GettingStarted/01-GettingStarted.csproj
 ```
 
-When the program starts, enter a prompt. Type `exit` to quit the application.
+To run the conversations sample, use:
+
+```bash
+dotnet run --project samples/02-Conversations/02-Conversations.csproj
+```
+
+The `01-GettingStarted` sample requests one prompt, displays the response, and waits for a key press before exiting. An empty prompt is rejected.
+
+The `02-Conversations` sample keeps reading prompts until `/exit` is entered. Use `/new` to clear the previous response reference and start a new conversation.
 
 ## Authorization and security
 
