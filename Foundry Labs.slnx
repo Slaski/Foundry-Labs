@@ -3,5 +3,6 @@
     <Project Path="samples/01-GettingStarted/01-GettingStarted.csproj" />
     <Project Path="samples/02-Conversations/02-Conversations.csproj" />
     <Project Path="samples/03-Streaming/03-Streaming.csproj" Id="f7f527ac-a1dc-4831-9172-fca2ccf7bd1c" />
+    <Project Path="samples/04-StructuredOutputs/04-StructuredOutputs.csproj" Id="c693ea1c-1c5d-41a6-94f2-66b4e1cb7ec2" />
   </Folder>
 </Solution>

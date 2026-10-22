@@ -25,9 +25,13 @@ The solution starts with simple integrations with models deployed in a Microsoft
 │   ├── 02-Conversations
 │   │   ├── 02-Conversations.csproj
 │   │   └── Program.cs
-│   └── 03-Streaming
-│       ├── 03-Streaming.csproj
-│       └── Program.cs
+│   ├── 03-Streaming
+│   │   ├── 03-Streaming.csproj
+│   │   └── Program.cs
+│   └── 04-StructuredOutputs
+│       ├── 04-StructuredOutputs.csproj
+│       ├── Program.cs
+│       └── PurchaseRequest.cs
 └── README.md
 ```
 
@@ -38,6 +42,7 @@ The solution starts with simple integrations with models deployed in a Microsoft
 | [`01-GettingStarted`](samples/01-GettingStarted) | Sends a single prompt to a deployed model using the Responses API and displays the response. |
 | [`02-Conversations`](samples/02-Conversations) | Maintains a multi-turn conversation and supports `/new` and `/exit` commands. |
 | [`03-Streaming`](samples/03-Streaming) | Streams response text incrementally, preserves conversation context, and supports interrupting a response with `Ctrl+C`. |
+| [`04-StructuredOutputs`](samples/04-StructuredOutputs) | Extracts purchase request data using a strict JSON Schema and validates the result locally. |
 
 New samples will be added to the `samples` directory following an incremental progression in complexity.
 
@@ -102,11 +107,19 @@ To run the streaming sample, use:
 dotnet run --project samples/03-Streaming/03-Streaming.csproj
 ```
 
+To run the structured outputs sample, use:
+
+```bash
+dotnet run --project samples/04-StructuredOutputs/04-StructuredOutputs.csproj
+```
+
 The `01-GettingStarted` sample requests one prompt, displays the response, and waits for a key press before exiting. An empty prompt is rejected.
 
 The `02-Conversations` sample keeps reading prompts until `/exit` is entered. Use `/new` to clear the previous response reference and start a new conversation.
 
 The `03-Streaming` sample displays response text as it arrives. Use `/new` to start a new conversation, `/exit` to quit, or `Ctrl+C` to interrupt the response currently being streamed.
+
+The `04-StructuredOutputs` sample extracts a purchase request into a strict JSON Schema, displays the structured data, and applies local business validation. Use `/exit` to quit.
 
 ## Authorization and security
 
@@ -124,7 +137,7 @@ The following sequence represents the planned direction for the solution and may
 - [x] Send prompts to a deployed model using the Azure AI SDK.
 - [x] Maintain conversations across requests.
 - [x] Stream response updates to the terminal.
-- [ ] Explore structured responses and generation options.
+- [x] Extract structured data with JSON Schema and validate the result.
 - [ ] Work with tools and function calling.
 - [ ] Create and use agents.
 - [ ] Explore grounding, knowledge, and Microsoft Foundry tools.
