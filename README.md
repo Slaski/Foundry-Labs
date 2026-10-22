@@ -22,8 +22,11 @@ The solution starts with simple integrations with models deployed in a Microsoft
 │   ├── 01-GettingStarted
 │   │   ├── 01-GettingStarted.csproj
 │   │   └── Program.cs
-│   └── 02-Conversations
-│       ├── 02-Conversations.csproj
+│   ├── 02-Conversations
+│   │   ├── 02-Conversations.csproj
+│   │   └── Program.cs
+│   └── 03-Streaming
+│       ├── 03-Streaming.csproj
 │       └── Program.cs
 └── README.md
 ```
@@ -34,6 +37,7 @@ The solution starts with simple integrations with models deployed in a Microsoft
 | --- | --- |
 | [`01-GettingStarted`](samples/01-GettingStarted) | Sends a single prompt to a deployed model using the Responses API and displays the response. |
 | [`02-Conversations`](samples/02-Conversations) | Maintains a multi-turn conversation and supports `/new` and `/exit` commands. |
+| [`03-Streaming`](samples/03-Streaming) | Streams response text incrementally, preserves conversation context, and supports interrupting a response with `Ctrl+C`. |
 
 New samples will be added to the `samples` directory following an incremental progression in complexity.
 
@@ -54,7 +58,7 @@ az login
 
 ## Configuration
 
-Both samples require the following values:
+All samples require the following values:
 
 | Setting | Description |
 | --- | --- |
@@ -92,9 +96,17 @@ To run the conversations sample, use:
 dotnet run --project samples/02-Conversations/02-Conversations.csproj
 ```
 
+To run the streaming sample, use:
+
+```bash
+dotnet run --project samples/03-Streaming/03-Streaming.csproj
+```
+
 The `01-GettingStarted` sample requests one prompt, displays the response, and waits for a key press before exiting. An empty prompt is rejected.
 
 The `02-Conversations` sample keeps reading prompts until `/exit` is entered. Use `/new` to clear the previous response reference and start a new conversation.
+
+The `03-Streaming` sample displays response text as it arrives. Use `/new` to start a new conversation, `/exit` to quit, or `Ctrl+C` to interrupt the response currently being streamed.
 
 ## Authorization and security
 
@@ -110,6 +122,8 @@ The following sequence represents the planned direction for the solution and may
 
 - [x] Connect to a Microsoft Foundry project.
 - [x] Send prompts to a deployed model using the Azure AI SDK.
+- [x] Maintain conversations across requests.
+- [x] Stream response updates to the terminal.
 - [ ] Explore structured responses and generation options.
 - [ ] Work with tools and function calling.
 - [ ] Create and use agents.

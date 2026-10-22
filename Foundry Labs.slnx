@@ -2,5 +2,6 @@
   <Folder Name="/samples/">
     <Project Path="samples/01-GettingStarted/01-GettingStarted.csproj" />
     <Project Path="samples/02-Conversations/02-Conversations.csproj" />
+    <Project Path="samples/03-Streaming/03-Streaming.csproj" Id="f7f527ac-a1dc-4831-9172-fca2ccf7bd1c" />
   </Folder>
 </Solution>
