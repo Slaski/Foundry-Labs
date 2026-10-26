@@ -32,10 +32,15 @@ The solution starts with simple integrations with models deployed in a Microsoft
 │   │   ├── 04-StructuredOutputs.csproj
 │   │   ├── Program.cs
 │   │   └── PurchaseRequest.cs
-│   └── 05-FunctionCalling
-│       ├── 05-FunctionCalling.csproj
+│   ├── 05-FunctionCalling
+│   │   ├── 05-FunctionCalling.csproj
+│   │   ├── CostCenterBudget.cs
+│   │   └── Program.cs
+│   └── 06-Agents
+│       ├── 06-Agents.csproj
 │       ├── CostCenterBudget.cs
-│       └── Program.cs
+│       ├── Program.cs
+│       └── README.md
 └── README.md
 ```
 
@@ -48,6 +53,7 @@ The solution starts with simple integrations with models deployed in a Microsoft
 | [`03-Streaming`](samples/03-Streaming) | Streams response text incrementally, preserves conversation context, and supports interrupting a response with `Ctrl+C`. |
 | [`04-StructuredOutputs`](samples/04-StructuredOutputs) | Extracts purchase request data using a strict JSON Schema and validates the result locally. |
 | [`05-FunctionCalling`](samples/05-FunctionCalling) | Uses function calling to look up fictional cost center budgets with validated tool arguments. |
+| [`06-Agents`](samples/06-Agents) | Creates a declarative agent, attaches a local tool, and drives a multi-turn conversation with function-calling behavior. |
 
 New samples will be added to the `samples` directory following an incremental progression in complexity.
 
@@ -124,6 +130,12 @@ To run the function calling sample, use:
 dotnet run --project samples/05-FunctionCalling/05-FunctionCalling.csproj
 ```
 
+To run the agents sample, use:
+
+```bash
+dotnet run --project samples/06-Agents/06-Agents.csproj
+```
+
 The `01-GettingStarted` sample requests one prompt, displays the response, and waits for a key press before exiting. An empty prompt is rejected.
 
 The `02-Conversations` sample keeps reading prompts until `/exit` is entered. Use `/new` to clear the previous response reference and start a new conversation.
@@ -133,6 +145,8 @@ The `03-Streaming` sample displays response text as it arrives. Use `/new` to st
 The `04-StructuredOutputs` sample extracts a purchase request into a strict JSON Schema, displays the structured data, and applies local business validation. Use `/exit` to quit.
 
 The `05-FunctionCalling` sample lets the model request a local budget lookup function, returns tool output to the model, and then produces the final response. Use `/exit` to quit.
+
+The `06-Agents` sample creates a declarative agent in the Foundry project, gives it a local `get_cost_center_budget` tool, and keeps the chat loop alive while the model uses the tool as needed. Use `/new` to reset the conversation and `/exit` to quit.
 
 ## Authorization and security
 
@@ -152,7 +166,7 @@ The following sequence represents the planned direction for the solution and may
 - [x] Stream response updates to the terminal.
 - [x] Extract structured data with JSON Schema and validate the result.
 - [x] Work with tools and function calling.
-- [ ] Create and use agents.
+- [x] Create and use agents.
 - [ ] Explore grounding, knowledge, and Microsoft Foundry tools.
 - [ ] Evaluate responses and track quality, cost, and performance.
 - [ ] Add observability and operational practice samples.

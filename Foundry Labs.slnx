@@ -5,5 +5,6 @@
     <Project Path="samples/03-Streaming/03-Streaming.csproj" Id="f7f527ac-a1dc-4831-9172-fca2ccf7bd1c" />
     <Project Path="samples/04-StructuredOutputs/04-StructuredOutputs.csproj" Id="c693ea1c-1c5d-41a6-94f2-66b4e1cb7ec2" />
     <Project Path="samples/05-FunctionCalling/05-FunctionCalling.csproj" Id="5c54102b-3d8a-4938-93ea-3e7c5de4e26b" />
+    <Project Path="samples/06-Agents/06-Agents.csproj" Id="039fed5d-fd1f-416f-91a6-56137bbf9cef" />
   </Folder>
 </Solution>
