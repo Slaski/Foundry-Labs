@@ -36,9 +36,15 @@ The solution starts with simple integrations with models deployed in a Microsoft
 │   │   ├── 05-FunctionCalling.csproj
 │   │   ├── CostCenterBudget.cs
 │   │   └── Program.cs
-│   └── 06-Agents
-│       ├── 06-Agents.csproj
-│       ├── CostCenterBudget.cs
+│   ├── 06-Agents
+│   │   ├── 06-Agents.csproj
+│   │   ├── CostCenterBudget.cs
+│   │   ├── Program.cs
+│   │   └── README.md
+│   └── 07-Knowledge
+│       ├── 07-Knowledge.csproj
+│       ├── Documents
+│       │   └── purchasing-policy.md
 │       ├── Program.cs
 │       └── README.md
 └── README.md
@@ -54,6 +60,7 @@ The solution starts with simple integrations with models deployed in a Microsoft
 | [`04-StructuredOutputs`](samples/04-StructuredOutputs) | Extracts purchase request data using a strict JSON Schema and validates the result locally. |
 | [`05-FunctionCalling`](samples/05-FunctionCalling) | Uses function calling to look up fictional cost center budgets with validated tool arguments. |
 | [`06-Agents`](samples/06-Agents) | Creates a declarative agent, attaches a local tool, and drives a multi-turn conversation with function-calling behavior. |
+| [`07-Knowledge`](samples/07-Knowledge) | Uploads a policy document, creates a vector store, and gives an agent a hosted file-search tool for grounded Q&A. |
 
 New samples will be added to the `samples` directory following an incremental progression in complexity.
 
@@ -136,6 +143,12 @@ To run the agents sample, use:
 dotnet run --project samples/06-Agents/06-Agents.csproj
 ```
 
+To run the knowledge sample, use:
+
+```bash
+dotnet run --project samples/07-Knowledge/07-Knowledge.csproj
+```
+
 The `01-GettingStarted` sample requests one prompt, displays the response, and waits for a key press before exiting. An empty prompt is rejected.
 
 The `02-Conversations` sample keeps reading prompts until `/exit` is entered. Use `/new` to clear the previous response reference and start a new conversation.
@@ -147,6 +160,8 @@ The `04-StructuredOutputs` sample extracts a purchase request into a strict JSON
 The `05-FunctionCalling` sample lets the model request a local budget lookup function, returns tool output to the model, and then produces the final response. Use `/exit` to quit.
 
 The `06-Agents` sample creates a declarative agent in the Foundry project, gives it a local `get_cost_center_budget` tool, and keeps the chat loop alive while the model uses the tool as needed. Use `/new` to reset the conversation and `/exit` to quit.
+
+The `07-Knowledge` sample uploads a fictional purchasing policy, creates a vector store from it, and gives an agent access to the document through the hosted file-search tool. Use `/new` to reset the conversation and `/exit` to quit.
 
 ## Authorization and security
 
@@ -167,7 +182,7 @@ The following sequence represents the planned direction for the solution and may
 - [x] Extract structured data with JSON Schema and validate the result.
 - [x] Work with tools and function calling.
 - [x] Create and use agents.
-- [ ] Explore grounding, knowledge, and Microsoft Foundry tools.
+- [x] Explore grounding, knowledge, and Microsoft Foundry tools.
 - [ ] Evaluate responses and track quality, cost, and performance.
 - [ ] Add observability and operational practice samples.
 
