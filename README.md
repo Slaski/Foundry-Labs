@@ -41,8 +41,15 @@ The solution starts with simple integrations with models deployed in a Microsoft
 │   │   ├── CostCenterBudget.cs
 │   │   ├── Program.cs
 │   │   └── README.md
-│   └── 07-Knowledge
-│       ├── 07-Knowledge.csproj
+│   ├── 07-Knowledge
+│   │   ├── 07-Knowledge.csproj
+│   │   ├── Documents
+│   │   │   └── purchasing-policy.md
+│   │   ├── Program.cs
+│   │   └── README.md
+│   └── 08-RAG
+│       ├── 08-RAG.csproj
+│       ├── DocumentChunk.cs
 │       ├── Documents
 │       │   └── purchasing-policy.md
 │       ├── Program.cs
@@ -61,6 +68,7 @@ The solution starts with simple integrations with models deployed in a Microsoft
 | [`05-FunctionCalling`](samples/05-FunctionCalling) | Uses function calling to look up fictional cost center budgets with validated tool arguments. |
 | [`06-Agents`](samples/06-Agents) | Creates a declarative agent, attaches a local tool, and drives a multi-turn conversation with function-calling behavior. |
 | [`07-Knowledge`](samples/07-Knowledge) | Uploads a policy document, creates a vector store, and gives an agent a hosted file-search tool for grounded Q&A. |
+| [`08-RAG`](samples/08-RAG) | Builds an in-memory embedding index from a local document and answers questions using top-K retrieved context. |
 
 New samples will be added to the `samples` directory following an incremental progression in complexity.
 
@@ -102,6 +110,22 @@ The values can also be provided as environment variables. Do not commit private 
 ```powershell
 $env:AZURE_AI_PROJECT_ENDPOINT = "https://<your-project>.services.ai.azure.com/api/projects/<your-project>"
 $env:MODEL_DEPLOYMENT = "<deployment-name>"
+```
+
+### Additional settings for `08-RAG`
+
+The `08-RAG` sample also requires:
+
+| Setting | Description |
+| --- | --- |
+| `AZURE_OPENAI_ENDPOINT` | Azure OpenAI endpoint used to generate embeddings. |
+| `EMBEDDING_DEPLOYMENT` | Name of the embedding model deployment. |
+
+Example:
+
+```powershell
+$env:AZURE_OPENAI_ENDPOINT = "https://<your-openai-resource>.openai.azure.com/"
+$env:EMBEDDING_DEPLOYMENT = "<embedding-deployment-name>"
 ```
 
 ## Running
@@ -149,6 +173,12 @@ To run the knowledge sample, use:
 dotnet run --project samples/07-Knowledge/07-Knowledge.csproj
 ```
 
+To run the local RAG sample, use:
+
+```bash
+dotnet run --project samples/08-RAG/08-RAG.csproj
+```
+
 The `01-GettingStarted` sample requests one prompt, displays the response, and waits for a key press before exiting. An empty prompt is rejected.
 
 The `02-Conversations` sample keeps reading prompts until `/exit` is entered. Use `/new` to clear the previous response reference and start a new conversation.
@@ -162,6 +192,8 @@ The `05-FunctionCalling` sample lets the model request a local budget lookup fun
 The `06-Agents` sample creates a declarative agent in the Foundry project, gives it a local `get_cost_center_budget` tool, and keeps the chat loop alive while the model uses the tool as needed. Use `/new` to reset the conversation and `/exit` to quit.
 
 The `07-Knowledge` sample uploads a fictional purchasing policy, creates a vector store from it, and gives an agent access to the document through the hosted file-search tool. Use `/new` to reset the conversation and `/exit` to quit.
+
+The `08-RAG` sample builds a local in-memory index from the fictional purchasing policy document, retrieves the most similar chunks with cosine similarity, and sends only the retrieved context to the model for grounded answers. Use `/exit` to quit.
 
 ## Authorization and security
 
